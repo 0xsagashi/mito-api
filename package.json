@@ -2,7 +2,7 @@
   "name": "mito-api",
   "version": "1.0.0",
   "scripts": {
-    "start": "node api/index.js",
+    "start": "vercel dev",
     "dev": "vercel dev"
   },
   "dependencies": {
