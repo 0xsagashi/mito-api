@@ -2,13 +2,12 @@ const express = require('express');
 const { getGasBalance } = require('../services/gasBalanceService');
 
 const app = express();
-const PORT = 3000; // Port pour le développement local
 
 // Middleware pour parser les requêtes JSON
 app.use(express.json());
 
 // GET /api/get-gas-balance
-app.get('/api/get-gas-balance', async (req, res) => {
+app.get('/get-gas-balance', async (req, res) => {
   const { networkId, chainId, address } = req.query;
 
   if (!networkId || !chainId || !address) {
@@ -24,7 +23,7 @@ app.get('/api/get-gas-balance', async (req, res) => {
 });
 
 // POST /api/get-gas-balance
-app.post('/api/get-gas-balance', async (req, res) => {
+app.post('/get-gas-balance', async (req, res) => {
   const { networkId, chainId, address } = req.body;
 
   if (!networkId || !chainId || !address) {
@@ -39,12 +38,5 @@ app.post('/api/get-gas-balance', async (req, res) => {
   }
 });
 
-// Démarrage du serveur local pour les tests
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`API is running on http://localhost:${PORT}`);
-  });
-}
-
-// Exporter Express pour Vercel
+// Exporter Express pour que Vercel puisse le reconnaître
 module.exports = app;
