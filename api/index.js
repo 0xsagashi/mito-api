@@ -1,13 +1,14 @@
 const express = require('express');
-const router = express.Router();
 const { getGasBalance } = require('../services/gasBalanceService');
 
-// Middleware pour parser les requêtes JSON
 const app = express();
+const PORT = 3000; // Port pour le développement local
+
+// Middleware pour parser les requêtes JSON
 app.use(express.json());
 
 // GET /api/get-gas-balance
-router.get('/get-gas-balance', async (req, res) => {
+app.get('/api/get-gas-balance', async (req, res) => {
   const { networkId, chainId, address } = req.query;
 
   if (!networkId || !chainId || !address) {
@@ -23,7 +24,7 @@ router.get('/get-gas-balance', async (req, res) => {
 });
 
 // POST /api/get-gas-balance
-router.post('/get-gas-balance', async (req, res) => {
+app.post('/api/get-gas-balance', async (req, res) => {
   const { networkId, chainId, address } = req.body;
 
   if (!networkId || !chainId || !address) {
@@ -38,7 +39,12 @@ router.post('/get-gas-balance', async (req, res) => {
   }
 });
 
-// Pour exposer les routes à Vercel
-module.exports = (req, res) => {
-  app(req, res); // Appeler Express
-};
+// Démarrage du serveur local pour les tests
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`API is running on http://localhost:${PORT}`);
+  });
+}
+
+// Exporter Express pour Vercel
+module.exports = app;
