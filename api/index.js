@@ -38,5 +38,8 @@ app.post('/get-gas-balance', async (req, res) => {
   }
 });
 
-// Export Express app pour que Vercel puisse l’utiliser
-module.exports = app;
+
+//module.exports = app;
+module.exports = (req, res) => {
+  res.status(200).json({ message: 'API is working' });
+};
