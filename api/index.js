@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 // GET /api/get-gas-balance
-app.get('/get-gas-balance', async (req, res) => {
+app.get('/api/get-gas-balance', async (req, res) => {
   const { networkId, chainId, address } = req.query;
 
   if (!networkId || !chainId || !address) {
@@ -23,7 +23,7 @@ app.get('/get-gas-balance', async (req, res) => {
 });
 
 // POST /api/get-gas-balance
-app.post('/get-gas-balance', async (req, res) => {
+app.post('/api/get-gas-balance', async (req, res) => {
   const { networkId, chainId, address } = req.body;
 
   if (!networkId || !chainId || !address) {
@@ -39,7 +39,7 @@ app.post('/get-gas-balance', async (req, res) => {
 });
 
 
-//module.exports = app;
-module.exports = (req, res) => {
+module.exports = app;
+/*module.exports = (req, res) => {
   res.status(200).json({ message: 'API is working' });
-};
+};*/
