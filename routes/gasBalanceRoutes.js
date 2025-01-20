@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { getGasBalance } = require('../services/gasBalanceService');
 
-// Route GET pour récupérer le solde de gas
+// GET get gas
 router.get('/get-gas-balance', async (req, res) => {
   const { networkId, chainId, address } = req.query;
 
@@ -18,7 +18,7 @@ router.get('/get-gas-balance', async (req, res) => {
   }
 });
 
-// Route POST pour récupérer le solde de gas
+// POST get gas
 router.post('/get-gas-balance', async (req, res) => {
   const { networkId, chainId, address } = req.body;
 

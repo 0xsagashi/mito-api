@@ -2,7 +2,7 @@ const axios = require('axios');
 const BASE_URL = 'https://api.routescan.io/v2/network';
 
 /**
- * Fonction pour récupérer le solde de gas d'une adresse.
+ * 
  * @param {string} networkId
  * @param {string} chainId
  * @param {string} address
@@ -13,7 +13,7 @@ async function getGasBalance(networkId, chainId, address) {
     const url = `${BASE_URL}/${networkId}/evm/${chainId}/address/${address}/gas-balance`;
     const response = await axios.get(url);
 
-    // Vérifie la réponse pour extraire le solde
+    // Verif avant d'extraire
     if (response.data?.items?.length > 0) {
       const balance = response.data.items[0].balance;
       return balance;
