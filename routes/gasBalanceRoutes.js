@@ -4,14 +4,14 @@ const { getGasBalance } = require('../services/gasBalanceService');
 
 // GET get gas
 router.get('/get-gas-balance', async (req, res) => {
-  const { address } = req.query;
+  const { networkId, chainId, address } = req.query;
 
-  if (!address) {
+  if (!networkId || !chainId || !address) {
     return res.status(400).json({ error: 'The parameters networkId, chainId and address are required.' });
   }
 
   try {
-    const balance = await getGasBalance(address);
+    const balance = await getGasBalance(networkId, chainId, address);
     return res.json({ success: true, balance });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
@@ -20,14 +20,14 @@ router.get('/get-gas-balance', async (req, res) => {
 
 // POST get gas
 router.post('/get-gas-balance', async (req, res) => {
-  const { address } = req.body;
+  const { networkId, chainId, address } = req.body;
 
-  if (!address) {
+  if (!networkId || !chainId || !address) {
     return res.status(400).json({ error: 'The parameters networkId, chainId and address are required.' });
   }
 
   try {
-    const balance = await getGasBalance(address);
+    const balance = await getGasBalance(networkId, chainId, address);
     return res.json({ success: true, balance });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
