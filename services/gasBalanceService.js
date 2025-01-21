@@ -23,22 +23,26 @@ async function getGasBalance(address) {
     throw new Error('Impossible to retrieve the gas balance.');
   }
 }
-/*async function getGasBalance(networkId, chainId, address) {
+
+async function isMitoBalance100(address) {
   try {
-    const url = `${BASE_URL}/${networkId}/evm/${chainId}/address/${address}/gas-balance`;
+    const url = `${BASE_URL}/testnet/evm/124832/address/${address}/gas-balance`;
     const response = await axios.get(url);
 
-    // Verif avant d'extraire
     if (response.data?.items?.length > 0) {
-      const balance = response.data.items[0].balance;
-      return balance;
+      const balance = BigInt(response.data.items[0].balance); 
+      const threshold = BigInt(100000000000000000000); 
+      // 100000000000000000000 = 100
+
+      return balance > threshold;
     } else {
-      throw new Error('No balance found for this address.');
+      return false;
     }
   } catch (error) {
     console.error('Routescan request error:', error.response?.data || error.message);
-    throw new Error('Impossible to retrieve the gas balance.');
+    return false; 
   }
-}*/
+}
 
-module.exports = { getGasBalance };
+
+module.exports = { getGasBalance, isMitoBalance100 };
