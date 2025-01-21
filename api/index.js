@@ -56,10 +56,6 @@ app.post('/api/mito-balance-100', async (req, res) => {
   try {
     const result = await isMitoBalance100(address);
     return res.json({
-      error: {
-        code: 0,
-        message: 'Succes',
-      },
       data: {
         result, 
       },
